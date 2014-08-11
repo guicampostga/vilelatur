@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/view/template/template.xhtml">
+	<ui:define name="topo">
+		<h:outputText value="Topo Pagina 1" />
+	</ui:define>
+
+	<ui:define name="centro">
+		<ui:insert>
+			<title>Suporte ?</title>
+		</ui:insert>
+		<f:facet name="header">
+	  				Suporte ?
+	  				<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+				href="javascript:window.history.go(-1)" />
+		</f:facet>
+		<h:form id="formSuporte">
+		</h:form>
+	</ui:define>
+</ui:composition>

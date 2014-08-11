@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/view/template/template.xhtml">
+	<ui:define name="centro">
+	<ui:insert>
+		<title>Cadastro de Cidade</title>
+		</ui:insert>
+		<f:facet name="header">
+	  				Cadastro de Cidade
+	  					<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+				href="javascript:window.history.go(-1)" />
+	  			</f:facet>
+		<div id="DivCadCidade">
+			<h:form id="formCadCidade">
+
+				<p:growl id="growl" autoUpdate="true" life="3500" />
+				<p:panelGrid columns="2" styleClass="gridPanel">
+					<p:outputLabel value="Código" for="txtCodigo">
+					</p:outputLabel>
+					<p:inputText id="txtCodigo"
+						value="#{cidadeController.objeto.codigo}" readonly="true"/>
+
+					<p:outputLabel value="Cidade" for="txtCidade">
+					</p:outputLabel>
+					<p:inputText id="txtCidade" required="true"
+						requiredMessage="Informe o nome da cidade"
+						value="#{cidadeController.objeto.descricao}" update="growl"/>
+						
+						<p:outputLabel value="UF" for="txtUF" />
+					<p:selectOneMenu value="#{cidadeController.objeto.uf}" id="txtUF"
+						required="true" requiredMessage="Selecione um Estado">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{ufController.lista}" var="_uf"
+							itemValue="#{_uf.codigo}" itemLabel="#{_uf.uf}" />
+
+					</p:selectOneMenu>
+
+					<p:commandButton value="Cadastrar" update="formCadCidade, growl"
+						rendered="#{cidadeController.objeto.codigo == null}"
+						icon="ui-icon-circle-check" action="#{cidadeController.incluir}"/>
+
+					<p:commandButton value="Editar" update="formCadCidade, growl"
+						rendered="#{cidadeController.objeto.codigo != null}"
+						icon="ui-icon-pencil" action="#{cidadeController.alterar()}"/>
+
+					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+						update=" formCadCidade" action="#{cidadeController.limpar}" />
+
+				</p:panelGrid>
+
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

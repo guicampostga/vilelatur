@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/view/template/template.xhtml">
+	<ui:define name="centro">
+		<ui:insert>
+			<title>Veiculos Cadastrados</title>
+		</ui:insert>
+		<f:facet name="header">
+	  				Veiculos Cadastrados
+	  				<p:button value="Novo" icon="ui-icon-plusthick"
+				href="/pages/veiculo/cadVeiculo.jsf" />
+			<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+				href="javascript:window.history.go(-1)" />
+			<p:commandButton value="Imprimir" type="button" icon="ui-icon-print">
+				<p:printer target=":formList:tableVeiculo" />
+			</p:commandButton>
+		</f:facet>
+		<h:form id="formList">
+			<p:growl id="growl" autoUpdate="true" life="3500" />
+			<p:dataTable id="tableVeiculo" paginator="true" rows="10"
+				value="#{veiculoController.listaDM}" var="_veiculo"
+				emptyMessage="Nao foi encontrado nenhuma informação!">
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Código"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_veiculo.codigo}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Modelo"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_veiculo.modeloVeiculo}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Marca"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_veiculo.marca}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Placa"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_veiculo.placa}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Ano Fabricação"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_veiculo.ano}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Vagas"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_veiculo.qtdVagas}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Ações"></h:outputText>
+					</f:facet>
+					<center>
+						<p:commandButton style="font-size: 12px;" id="editar"
+							value="Editar"
+							action="#{veiculoController.exibirFormularioEditar()}"
+							icon="ui-icon-pencil" update="tableVeiculo" />
+						<p:tooltip id="toolTipTrack5" for="editar"
+							value="Clique para editar as informções deste cadastro!"
+							trackMouse="true" />
+						<p:commandButton style="font-size: 12px;left: 10px; " id="remover"
+							value="Remover" action="#{veiculoController.remover()}"
+							icon="ui-icon-trash" update="tableVeiculo" />
+						<p:tooltip id="toolTipTrack6" for="remover"
+							value="Apagar este cadastro!" trackMouse="true" />
+					</center>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

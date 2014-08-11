@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/view/template/template.xhtml">
+	<ui:define name="centro">
+	<ui:insert>
+		<title>Cadastro de Cliente</title>
+		</ui:insert>
+		<f:facet name="header">
+	  				Cadastro de Clientes
+	  					<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+				href="javascript:window.history.go(-1)" />
+	  			</f:facet>
+		<div id="DivCad">
+			<h:form id="formCadCliente">
+				<p:growl id="growl" autoUpdate="true" life="3500" />
+				<p:panelGrid columns="4" styleClass="gridPanel">
+					<p:outputLabel value="Código" for="txtCodigo">
+					</p:outputLabel>
+					<p:inputText id="txtCodigo" readonly="true"
+						value="#{clienteController.objeto.codigo}" />
+					<p:outputLabel value="Nome" for="txtNome">
+					</p:outputLabel>
+					<p:inputText id="txtNome" required="true"
+						requiredMessage="Campo Nome obrigatório"
+						value="#{clienteController.objeto.nome}" />
+
+					<p:outputLabel value="RG" for="txtRg">
+					</p:outputLabel>
+					<p:inputText id="txtRg" value="#{clienteController.objeto.rg}" />
+
+					<p:outputLabel value="Cpf" for="txtCpf">
+					</p:outputLabel>
+					<p:inputMask id="txtCpf" required="true" mask="999.999.999-99"
+						requiredMessage="Campo Cpf obrigatório" maxlength="11"
+						value="#{clienteController.objeto.cpf}" />
+
+
+					<p:outputLabel value="Data Nascimento" for="txtDtNascimento">
+					</p:outputLabel>
+					<p:calendar id="txtDtNascimento" required="true"
+						requiredMessage="Campo Data Nascimento obrigatório"
+						value="#{clienteController.objeto.dataNasc}" />
+
+					<p:outputLabel value="Endereço" for="txtEndereco">
+					</p:outputLabel>
+					<p:inputText id="txtEndereco" required="true"
+						requiredMessage="Campo Endereço obrigatório"
+						value="#{clienteController.objeto.endereco}" />
+
+					<p:outputLabel value="Bairro" for="txtBairro">
+					</p:outputLabel>
+					<p:inputText id="txtBairro" required="true"
+						requiredMessage="Campo Bairro obrigatório"
+						value="#{clienteController.objeto.bairro}" />
+
+					<p:outputLabel value="Número" for="txtNumero">
+					</p:outputLabel>
+					<p:inputText id="txtNumero" required="true"
+						requiredMessage="Campo Número obrigatório"
+						value="#{clienteController.objeto.numero}" />
+
+					<p:outputLabel value="Complemento" for="txtComplemento">
+					</p:outputLabel>
+					<p:inputText id="txtComplemento"
+						value="#{clienteController.objeto.complemento}" />
+
+					<p:outputLabel value="Telefone" for="txtTelefone">
+					</p:outputLabel>
+					<p:inputMask id="txtTelefone" mask="(99) 9999-9999" required="true"
+						requiredMessage="Campo Telefone Obrigatorio"
+						value="#{clienteController.objeto.telefone}" />
+
+					<p:outputLabel value="Cidade" for="txtCidade">
+					</p:outputLabel>
+					<p:inputText id="txtCidade" required="true"
+						requiredMessage="Favor informe sua Cidade"
+						value="#{clienteController.objeto.cidade}" />
+
+					<p:outputLabel value="UF" for="txtUF" />
+					<p:selectOneMenu value="#{clienteController.objeto.uf}" id="txtUF"
+						required="true" requiredMessage="Selecione um Estado">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{ufController.lista}" var="_uf"
+							itemValue="#{_uf.codigo}" itemLabel="#{_uf.uf}" />
+
+					</p:selectOneMenu>
+				</p:panelGrid>
+				<p:panelGrid columns="2" styleClass="gridBotons">
+					<p:commandButton value="Salvar"
+						rendered="#{clienteController.objeto.codigo == null}"
+						update="growl, formCadCliente" icon="ui-icon-circle-check"
+						action="#{clienteController.incluir}" />
+
+					<p:commandButton value="Editar"
+						rendered="#{clienteController.objeto.codigo != null}"
+						update="growl, formCadCliente" icon="ui-icon-pencil"
+						action="#{clienteController.alterar()}"></p:commandButton>
+
+					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+						update=" formCadCliente " action="#{clienteController.limpar}" />
+				</p:panelGrid>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

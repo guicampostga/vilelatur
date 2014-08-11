@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/view/template/template.xhtml">
+	<ui:define name="topo">
+		<h:outputText value="Topo Pagina 1" />
+	</ui:define>
+
+	<ui:define name="centro">
+		<ui:insert>
+			<title>Funções Cadastradas</title>
+		</ui:insert>
+		<f:facet name="header">
+	  				Funcoes cadastradas
+	  				<p:button value="Novo" icon="ui-icon-plusthick"
+				href="/pages/funcao/cadFuncao.jsf" />
+			<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+				href="javascript:window.history.go(-1)" />
+			<p:commandButton value="Imprimir" type="button" icon="ui-icon-print">
+				<p:printer target=":formList:tableFuncao" />
+			</p:commandButton>
+		</f:facet>
+		<h:form id="formList">
+			<p:dataTable id="tableFuncao" paginator="true" rows="10"
+				value="#{funcaoController.listaDM}" var="_funcao"
+				emptyMessage="Nao foi encontrado nenhuma informação!">
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Código"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_funcao.codigo}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Função"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_funcao.descricao}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Ações"></h:outputText>
+					</f:facet>
+					<center>
+						<p:commandButton style="font-size: 12px;" id="editar"
+							value="Editar"
+							action="#{funcaoController.exibirFormularioEditar()}"
+							icon="ui-icon-pencil" update="tableFuncao" />
+						<p:tooltip id="toolTipTrack5" for="editar"
+							value="Clique para editar as informções deste cadastro!"
+							trackMouse="true" />
+						<p:commandButton style="font-size: 12px;left:10px; " id="remover"
+							value="Remover" action="#{funcaoController.remover()}"
+							icon="ui-icon-trash" update="tableFuncao" />
+						<p:tooltip id="toolTipTrack6" for="remover"
+							value="Apagar este cadastro!" trackMouse="true" />
+					</center>
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

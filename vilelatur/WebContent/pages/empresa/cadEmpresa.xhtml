@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/view/template/template.xhtml">
+	<ui:define name="centro">
+		<ui:insert>
+			<title>Cadastro de Empresa</title>
+		</ui:insert>
+		<f:facet name="header">
+	  				Cadastro de Empresa
+	  				<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+				href="javascript:window.history.go(-1)" />
+	  			</f:facet>
+		<div id="DivCad">
+			<h:form id="formCadEmpresa">
+				<p:growl id="growl" life="3500" />
+				<p:panelGrid columns="4" styleClass="gridPanel">
+					<p:outputLabel value="Código" for="txtCodigo">
+					</p:outputLabel>
+					<p:inputText id="txtCodigo" readonly="true"
+						value="#{empresaController.objeto.codigo}" />
+
+					<p:outputLabel value="Nome Fantasia" for="txtNmFantasia">
+					</p:outputLabel>
+					<p:inputText id="txtNmFantasia" required="true"
+						value="#{empresaController.objeto.nomeFantazia}"
+						requiredMessage="Campo Nome Fantasia obrigatório" />
+
+					<p:outputLabel value="Razão Social" for="txtRzSocial">
+					</p:outputLabel>
+					<p:inputText id="txtRzSocial" required="true"
+						value="#{empresaController.objeto.razaoSocial}"
+						requiredMessage="Campo Razão Social obrigatório" />
+
+					<p:outputLabel value="CNPJ" for="txtCnpj">
+					</p:outputLabel>
+					<p:inputMask id="txtCnpj" required="true" maxlength="14"
+						mask="99.999.999/9999-99" value="#{empresaController.objeto.cnpj}"
+						requiredMessage="Campo Cnpj Fantasia obrigatório" />
+
+					<p:outputLabel value="Endereço" for="txtEndereco">
+					</p:outputLabel>
+					<p:inputText id="txtEndereco" required="true"
+						value="#{empresaController.objeto.endereco}"
+						requiredMessage="Campo Endereço obrigatório" />
+
+					<p:outputLabel value="Bairro" for="txtBairro">
+					</p:outputLabel>
+					<p:inputText id="txtBairro" required="true"
+						value="#{empresaController.objeto.bairro}"
+						requiredMessage="Campo Bairro obrigatório" />
+
+					<p:outputLabel value="Número" for="txtNumero">
+					</p:outputLabel>
+					<p:inputText id="txtNumero" required="true"
+						value="#{empresaController.objeto.numero}"
+						requiredMessage="Campo Número obrigatório" />
+
+					<p:outputLabel value="Complemento" for="txtComplemento">
+					</p:outputLabel>
+					<p:inputText id="txtComplemento"
+						value="#{empresaController.objeto.complemento}" />
+
+					<p:outputLabel value="Cidade" for="txtCidade">
+					</p:outputLabel>
+					<p:inputText id="txtCidade" required="true"
+						value="#{empresaController.objeto.cidade}"
+						requiredMessage="Campo Cidade obrigatório" />
+
+					<p:outputLabel value="UF" for="txtUF" />
+					<p:selectOneMenu value="#{empresaController.objeto.estado}"
+						id="txtUF" required="true" requiredMessage="Selecione um Estado">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{ufController.lista}" var="_uf"
+							itemValue="#{_uf.codigo}" itemLabel="#{_uf.uf}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Telefone" for="txtTelefone">
+					</p:outputLabel>
+					<p:inputMask id="txtTelefone" required="true" mask="(99) 9999-9999"
+						maxlength="10" value="#{empresaController.objeto.telefone}"
+						requiredMessage="Campo Telefone obrigatório" />
+
+					<p:outputLabel value="Email" for="txtEmail">
+					</p:outputLabel>
+					<p:inputText id="txtEmail" required="true"
+						placeholder="usuario@dominio.com"
+						value="#{empresaController.objeto.email}"
+						requiredMessage="Campo Email obrigatório" />
+				</p:panelGrid>
+				<p:panelGrid columns="2" styleClass="gridBotons">
+					<p:commandButton value="Cadastrar" update="formCadEmpresa, growl"
+						rendered="#{empresaController.objeto.codigo == null}"
+						icon="ui-icon-circle-check" action="#{empresaController.incluir}"></p:commandButton>
+
+					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+						update=" formCadEmpresa " action="#{empresaController.limpar}" />
+
+					<p:commandButton value="Editar" update="formCadEmpresa, growl"
+						rendered="#{empresaController.objeto.codigo != null}"
+						icon="ui-icon-pencil" action="#{empresaController.alterar}"></p:commandButton>
+				</p:panelGrid>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

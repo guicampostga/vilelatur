@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/view/template/template.xhtml">
+	<ui:define name="centro">
+		<ui:insert>
+			<title>Passagens Emitidas</title>
+			<style>
+.ui-outputlabel {
+	float: right;
+	font-weight: bold;
+}
+
+.userTopo {
+	float: left;
+}
+</style>
+		</ui:insert>
+		<f:facet name="header">
+	  				Passagens Emitidas
+	  				<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+				href="javascript:window.history.go(-1)" />
+			<p:commandButton value="Imprimir" type="button" icon="ui-icon-print">
+				<p:printer target=":frmViagens:tableViagem" />
+			</p:commandButton>
+		</f:facet>
+		<h:form id="frmViagens">
+			<p:growl id="growl" autoUpdate="true" life="3500" />
+			<p:dataTable id="tableViagem" paginator="true" rows="10"
+				selection="#{viagemController.objetoSelecionado}"
+				rowKey="#{_viagem.codigo}" selectionMode="single"
+				value="#{viagemController.listaDM}" var="_viagem"
+				emptyMessage="Nao foi encontrado nenhuma informaçãoo!">
+				<p:ajax event="rowSelect" update=":frmViagens:detalheViagem"
+					oncomplete="PF('viagemDialog').show()" />
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Código"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_viagem.codigo}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Passageiro"></h:outputText>
+					</f:facet>
+					<h:outputText id="clienteNome"
+						value="#{_viagem.complementoId.clienteNome}" />
+					<p:tooltip id="toolTipTrack" for="clienteNome"
+						value="Clique para ver os dados completos!" trackMouse="true" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Origem"></h:outputText>
+					</f:facet>
+					<h:outputText id="clienteOrigem" value="#{_viagem.origem}" />
+					<p:tooltip id="toolTipTrack2" for="clienteOrigem"
+						value="Clique para ver os dados completos!" trackMouse="true" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Destino"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_viagem.destino}" />
+					<p:tooltip id="toolTipTrack3" for="clienteNome"
+						value="Clique para ver os dados completos!" trackMouse="true" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Data" />
+					</f:facet>
+					<p:tooltip id="toolTipTrack4" for="clienteNome"
+						value="Clique para ver os dados completos!" trackMouse="true" />
+					<h:outputText value="#{_viagem.viagemData}">
+						<f:convertDateTime pattern="dd/MM/yyyy">
+						</f:convertDateTime>
+					</h:outputText>
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Hora"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_viagem.horaSaidaVlr}" />
+					<p:tooltip id="toolTipTrack5" for="clienteNome"
+						value="Clique para ver os dados completos!" trackMouse="true" />
+				</p:column>
+			</p:dataTable>
+
+			<!-- Inicio Dialog Detalhes Viagem -->
+			<p:dialog header="Viagem Detalhada" widgetVar="viagemDialog"
+				modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+				<p:outputPanel id="detalheViagem" style="text-align:center;">
+					<p:panelGrid columns="4" columnClasses="label,value"
+						style="width:780;">
+
+						<p:outputLabel value="Codigo:" for="txtCodigo">
+						</p:outputLabel>
+
+						<h:outputText id="txtCodigo" readonly="true"
+							value="#{viagemController.objetoSelecionado.codigo}" />
+
+						<p:outputLabel value="Emissão:" for="txtDataEmissao">
+						</p:outputLabel>
+						<h:outputText id="txtDataEmissao"
+							value="#{viagemController.objetoSelecionado.dataEmissao}">
+							<f:convertDateTime pattern="dd/MM/yyyy">
+							</f:convertDateTime>
+						</h:outputText>
+
+						<p:outputLabel value="Passageiro:" for="txtNome">
+						</p:outputLabel>
+						<h:outputText id="txtNome"
+							value="#{viagemController.objetoSelecionado.complementoId.clienteNome}" />
+
+						<p:outputLabel value="Saida:" for="txtDataSaida">
+						</p:outputLabel>
+						<h:outputText id="txtDataSaida"
+							value="#{viagemController.objetoSelecionado.viagemData}">
+							<f:convertDateTime pattern="dd/MM/yyyy">
+							</f:convertDateTime>
+						</h:outputText>
+
+						<p:outputLabel value="Horario:" for="txtHorario" />
+						<h:outputText id="txtHorario"
+							value="#{viagemController.objetoSelecionado.horaSaidaVlr}" />
+
+						<p:outputLabel value="Origem:" for="txtOrigem">
+						</p:outputLabel>
+						<h:outputText id="txtOrigem"
+							value="#{viagemController.objetoSelecionado.origem}" />
+
+						<p:outputLabel value="Destino:" for="txtDestino">
+						</p:outputLabel>
+						<h:outputText id="txtDestino"
+							value="#{viagemController.objetoSelecionado.destino}" />
+
+						<p:outputLabel value="Veiculo:" for="txtVeiculoNome">
+						</p:outputLabel>
+						<h:outputText id="txtVeiculoNome"
+							value="#{viagemController.objetoSelecionado.complementoId.veiculoNome}" />
+
+						<p:outputLabel value="Endereco de entrega:"
+							for="txtEnderecoEntrega">
+						</p:outputLabel>
+						<h:outputText id="txtEnderecoEntrega"
+							value="#{viagemController.objetoSelecionado.enderecoEntrega}" />
+
+						<p:outputLabel value="Numero:" for="txtNumeroEntrega">
+						</p:outputLabel>
+						<h:outputText id="txtNumeroEntrega"
+							value="#{viagemController.objetoSelecionado.numeroEntrega}" />
+
+						<p:outputLabel value="Complemento:" for="txtComplementoEntrega">
+						</p:outputLabel>
+						<h:outputText id="txtComplementoEntrega"
+							value="#{viagemController.objetoSelecionado.complementoEntrega}" />
+
+						<p:outputLabel value="Bairro:" for="txtBairroEntrega">
+						</p:outputLabel>
+						<h:outputText id="txtBairroEntrega"
+							value="#{viagemController.objetoSelecionado.bairroEntrega}" />
+
+
+					</p:panelGrid>
+				</p:outputPanel>
+			</p:dialog>
+			<!-- Fim Dialog Detalhes Viagem -->
+		</h:form>
+
+	</ui:define>
+</ui:composition>

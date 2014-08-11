@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="shortcut icon" type="image/png"
+		href="#{request.contextPath}/view/imgs/logo.png" />
+	<title>Login - Vilela Tur</title>
+	<style>
+.grid tr,td {
+	border: 0px !important;
+}
+
+#margem {
+	border: 1px black;
+}
+#logoTopo{
+position: relative;
+margin-left: 620px;
+margin-top: 80px;
+}
+</style>
+</h:head>
+<h:body>
+<div id="logoTopo">
+<IMG src="./view/imgs/logo.png" />
+</div>
+	<form id="t" action="j_spring_security_check" method="post">
+		<p:growl id="grow" life="3000" autoUpdate="true" />
+		<p:dialog modal="true" visible="true" showEffect="fade"
+			resizable="false" closable="false">
+			<f:facet name="header">Area Restrita</f:facet>
+			<div id="margem">
+				<p:panelGrid columns="2" styleClass="grid">
+					<p:outputLabel value="Usuario:" for="j_username"
+						style="font-size: 13px;" />
+					<p:inputText placeholder="Usuario" id="j_username"
+						style="font-size: 13px;" required="true"
+						requiredMessage="Favor digitar um Usuario" />
+
+					<p:outputLabel value="Senha:" for="j_password"
+						style="font-size: 13px;" />
+					<p:password id="j_password" placeholder="Senha" required="true" update="grow"
+						requiredMessage="Favor digitar uma Senha" style="font-size: 13px;" />
+
+				</p:panelGrid>
+			</div>
+			<f:facet name="footer">
+			<center>
+							<p:commandButton value="Logar" type="submit"
+								style="font-size: 13px;"
+								onclick="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only"
+								icon="ui-icon-locked" />
+							<p:button value="Sair" icon="ui-icon-closethick"
+								style="font-size: 13px; left: 10px" href="javascript:window.close();"/>
+						</center>
+			</f:facet>
+		</p:dialog>
+	</form>
+</h:body>
+
+</html>

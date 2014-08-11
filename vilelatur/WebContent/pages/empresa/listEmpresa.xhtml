@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/view/template/template.xhtml">
+	<ui:define name="centro">
+		<ui:insert>
+			<title>Empresas Cadastradas</title>
+		</ui:insert>
+		<f:facet name="header">
+	  				Empresas cadastradas
+	  				<p:button value="Novo" icon="ui-icon-plusthick"
+				href="/pages/empresa/cadEmpresa.jsf" />
+			<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+				href="javascript:window.history.go(-1)" />
+			<p:commandButton value="Imprimir" type="button" icon="ui-icon-print">
+				<p:printer target=":formList:tableEmpresa" />
+			</p:commandButton>
+		</f:facet>
+		<h:form id="formList">
+			<p:dataTable id="tableEmpresa" paginator="true" rows="10"
+				value="#{empresaController.listaDM}" var="_empresa"
+				emptyMessage="Nao foi encontrado nenhuma informação!">
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Código"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_empresa.codigo}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome Fantazia"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_empresa.nomeFantazia}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Razão Social"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_empresa.razaoSocial}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="CNPJ"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_empresa.cnpj}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Telefone"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_empresa.telefone}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Ações"></h:outputText>
+					</f:facet>
+					<center>
+						<p:commandButton style="font-size: 12px;" id="editar"
+							value="Editar"
+							action="#{empresaController.exibirFormularioEditar()}"
+							icon="ui-icon-pencil" update="tableEmpresa" />
+						<p:tooltip id="toolTipTrack5" for="editar"
+							value="Clique para editar as informções deste cadastro!"
+							trackMouse="true" />
+						<p:commandButton style="font-size: 12px;left:10px; " id="remover"
+							value="Remover" action="#{empresaController.remover()}"
+							icon="ui-icon-trash" update="tableEmpresa" />
+						<p:tooltip id="toolTipTrack6" for="remover"
+							value="Apagar este cadastro!" trackMouse="true" />
+					</center>
+				</p:column>
+			</p:dataTable>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/view/template/template.xhtml">
+	<ui:define name="centro">
+		<ui:insert>
+			<title>Clientes Cadastrados</title>
+			<style>
+.ui-outputlabel {
+	float: right;
+	font-weight: bold;
+}
+
+.userTopo {
+	float: left;
+}
+</style>
+		</ui:insert>
+		<ui:insert>
+			<title>Funcionarios Cadastrados</title>
+		</ui:insert>
+		<f:facet name="header">
+	  				Funcionarios cadastrados
+	  				<p:button value="Novo" icon="ui-icon-plusthick"
+				href="/pages/funcionario/cadFuncionario.jsf" />
+			<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+				href="javascript:window.history.go(-1)" />
+			<p:commandButton value="Imprimir" type="button" icon="ui-icon-print">
+				<p:printer target=":formFuncionario:tableFuncionario" />
+			</p:commandButton>
+		</f:facet>
+		<h:form id="formFuncionario">
+
+			<p:growl id="growl" autoUpdate="true" life="3500" />
+			<p:dataTable id="tableFuncionario" paginator="true" rows="10"
+				selection="#{funcionarioController.objetoSelecionado}"
+				rowKey="#{_funcionario.codigo}" selectionMode="single"
+				value="#{funcionarioController.listaDM}" var="_funcionario"
+				emptyMessage="Nao foi encontrado nenhuma informação!">
+				<p:ajax event="rowSelect"
+					update=":formFuncionario:detalheFuncionario"
+					oncomplete="PF('funcionarioDialog').show()" />
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Código" />
+					</f:facet>
+					<h:outputText value="#{_funcionario.codigo}" id="codigo" />
+					<p:tooltip id="toolTipTrack" for="codigo"
+						value="Clique para ver os dados completos!" trackMouse="true" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome" />
+					</f:facet>
+					<h:outputText value="#{_funcionario.nome}" id="nome" />
+					<p:tooltip id="toolTipTrack1" for="nome"
+						value="Clique para ver os dados completos!" trackMouse="true" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="CPF" />
+					</f:facet>
+					<h:outputText value="#{_funcionario.cpf}" id="cpf" />
+					<p:tooltip id="toolTipTrack2" for="cpf"
+						value="Clique para ver os dados completos!" trackMouse="true" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Função" />
+					</f:facet>
+					<h:outputText value="#{_funcionario.funcaoNome}" id="funcao" />
+					<p:tooltip id="toolTipTrack3" for="funcao"
+						value="Clique para ver os dados completos!" trackMouse="true" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Telefone" />
+					</f:facet>
+					<h:outputText value="#{_funcionario.telefone}" id="telefone" />
+					<p:tooltip id="toolTipTrack4" for="telefone"
+						value="Clique para ver os dados completos!" trackMouse="true" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Ações" />
+					</f:facet>
+					<center>
+						<p:commandButton style="font-size: 12px;" id="editar"
+							value="Editar"
+							action="#{funcionarioController.exibirFormularioEditar()}"
+							icon="ui-icon-pencil" />
+						<p:tooltip id="toolTipTrack5" for="editar"
+							value="Clique para editar as informções deste cadastro!"
+							trackMouse="true" />
+						<p:commandButton style="font-size: 12px;left: 10px; " id="remover"
+							value="Remover" action="#{funcionarioController.remover()}"
+							icon="ui-icon-trash" update="tableFuncionario" />
+						<p:tooltip id="toolTipTrack6" for="remover"
+							value="Apagar este cadastro!" trackMouse="true" />
+					</center>
+				</p:column>
+			</p:dataTable>
+
+			<!-- Inicio Dialog Funcionario -->
+			<p:dialog header="Funcionario Detalhado"
+				widgetVar="funcionarioDialog" modal="true" showEffect="fade"
+				hideEffect="fade" resizable="false">
+				<p:outputPanel id="detalheFuncionario" style="text-align:center;">
+					<p:panelGrid columns="4" columnClasses="label,value"
+						style="width:780;">
+
+						<p:outputLabel value="Código:" for="txtCodigo">
+						</p:outputLabel>
+
+						<h:outputText id="txtCodigo" readonly="true"
+							value="#{funcionarioController.objetoSelecionado.codigo}" />
+						<p:outputLabel value="Nome:" for="txtNome">
+						</p:outputLabel>
+						<h:outputText id="txtNome"
+							value="#{funcionarioController.objetoSelecionado.nome}" />
+
+						<p:outputLabel value="RG:" for="txtRg">
+						</p:outputLabel>
+						<h:outputText id="txtRg"
+							value="#{funcionarioController.objetoSelecionado.rg}" />
+
+						<p:outputLabel value="CPF:" for="txtCpf">
+						</p:outputLabel>
+						<h:outputText id="txtCpf"
+							value="#{funcionarioController.objetoSelecionado.cpf}" />
+
+
+						<p:outputLabel value="Data Nascimento:" for="txtDtNascimento">
+						</p:outputLabel>
+
+						<h:outputText id="txtDtNascimento"
+							value="#{funcionarioController.objetoSelecionado.dataNasc}">
+							<f:convertDateTime pattern="dd/MM/yyyy">
+							</f:convertDateTime>
+						</h:outputText>
+
+						<p:outputLabel value="Endereço:" for="txtEndereco">
+						</p:outputLabel>
+						<h:outputText id="txtEndereco"
+							value="#{funcionarioController.objetoSelecionado.endereco}" />
+
+						<p:outputLabel value="Bairro:" for="txtBairro">
+						</p:outputLabel>
+						<h:outputText id="txtBairro"
+							value="#{funcionarioController.objetoSelecionado.bairro}" />
+
+						<p:outputLabel value="Número:" for="txtNumero">
+						</p:outputLabel>
+						<h:outputText id="txtNumero"
+							value="#{funcionarioController.objetoSelecionado.numeroCasa}" />
+
+						<p:outputLabel value="Complemento:" for="txtComplemento">
+						</p:outputLabel>
+						<h:outputText id="txtComplemento"
+							value="#{funcionarioController.objetoSelecionado.complemento}" />
+
+						<p:outputLabel value="Telefone:" for="txtTelefone">
+						</p:outputLabel>
+						<h:outputText id="txtTelefone"
+							value="#{funcionarioController.objetoSelecionado.telefone}" />
+
+						<p:outputLabel value="Cidade:" for="txtCidade">
+						</p:outputLabel>
+						<h:outputText id="txtCidade"
+							value="#{funcionarioController.objetoSelecionado.cidade}" />
+
+						<p:outputLabel value="UF:" for="txtUF" />
+						<h:outputText id="txtUF"
+							value="#{funcionarioController.objetoSelecionado.ufNome}" />
+
+						<p:outputLabel value="Email:" for="txtEmail" />
+						<h:outputText id="txtEmail"
+							value="#{funcionarioController.objetoSelecionado.email}" />
+
+						<p:outputLabel value="Função:" for="txtFuncao" />
+						<h:outputText id="txtFuncao"
+							value="#{funcionarioController.objetoSelecionado.funcaoNome}" />
+					</p:panelGrid>
+				</p:outputPanel>
+					<center>
+					<p:commandButton value="Imprimir" type="button"
+						icon="ui-icon-print" style="display:block;margin-top: 20px">
+						<p:printer target="detalheFuncionario" />
+					</p:commandButton>
+				</center>
+			</p:dialog>
+			<!-- Fim Dialog Viagem Cliente -->
+		</h:form>
+	</ui:define>
+</ui:composition>

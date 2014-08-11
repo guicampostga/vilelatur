@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/view/template/template.xhtml">
+	<ui:define name="centro">
+		<ui:insert>
+			<title>Horários Cadastrados</title>
+		</ui:insert>
+		<f:facet name="header">
+	  				Horários Cadastrados
+	  				<p:button value="Novo" icon="ui-icon-plusthick"
+				href="/pages/horario/cadHorario.jsf" />
+			<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+				href="javascript:window.history.go(-1)" />
+			<p:commandButton value="Imprimir" type="button" icon="ui-icon-print">
+				<p:printer target=":formList:tableHorario" />
+			</p:commandButton>
+		</f:facet>
+		<h:form id="formList">
+			<p:growl id="growl" autoUpdate="true" life="3500" />
+			<p:dataTable id="tableHorario" paginator="true" rows="10"
+				value="#{horarioController.listaDM}" var="_horario"
+				emptyMessage="Nao foi encontrado nenhuma informação!">
+
+				<p:column sortBy="#{_horario.codigo}">
+					<f:facet name="header">
+						<h:outputText value="Código"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_horario.codigo}" />
+				</p:column>
+
+				<p:column sortBy="#{_horario.horaSaida}">
+					<f:facet name="header">
+						<h:outputText value="Hora saida"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_horario.horaSaida}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Hora chegada"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_horario.horaChegada}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Cidade origem"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_horario.cidadeOrigemVlr}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Cidade destino"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_horario.cidadeDestinoVlr}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Ações"></h:outputText>
+					</f:facet>
+					<center>
+						<p:commandButton style="font-size: 12px;" id="editar"
+							value="Editar"
+							action="#{horarioController.exibirFormularioEditar()}"
+							update="tableHorario" icon="ui-icon-pencil" />
+						<p:tooltip id="toolTipTrack5" for="editar"
+							value="Clique para editar as informções deste cadastro!"
+							trackMouse="true" />
+						<p:commandButton style="font-size: 12px; left: 10px;" id="remover"
+							value="Remover" action="#{horarioController.remover()}"
+							update="tableHorario" icon="ui-icon-trash" />
+						<p:tooltip id="toolTipTrack6" for="remover"
+							value="Apagar este cadastro!" trackMouse="true" />
+					</center>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/view/template/template.xhtml">
+	<ui:define name="centro">
+	<ui:insert>
+			<title>Cadastro de Veículo</title>
+		</ui:insert>
+		<f:facet name="header">
+	  				Cadastro de Veículo
+	  				<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+				href="javascript:window.history.go(-1)" />
+	  			</f:facet>
+		<div id="DivCad">
+			<h:form id="formCadVeiculo">
+				<p:growl id="growl" autoUpdate="true" life="3500" />
+				<p:panelGrid columns="4" styleClass="gridPanel">
+					<p:outputLabel value="Código" for="txtCodigo">
+					</p:outputLabel>
+					<p:inputText id="txtCodigo" readonly="true"
+						value="#{veiculoController.objeto.codigo}" />
+					<p:outputLabel value="Modelo" for="txtModelo">
+					</p:outputLabel>
+					<p:inputText id="txtModelo" required="true"
+						requiredMessage="Campo modelo obrigatório"
+						value="#{veiculoController.objeto.modeloVeiculo}" />
+
+					<p:outputLabel value="Marca" for="txtMarca">
+					</p:outputLabel>
+					<p:inputText id="txtMarca" required="true"
+						requiredMessage="Campo marca obrigatório"
+						value="#{veiculoController.objeto.marca}" />
+
+					<p:outputLabel value="Placa" for="txtPlaca">
+					</p:outputLabel>
+					<p:inputMask id="txtPlaca" mask="aaa-9999" required="true"
+						requiredMessage="Campo placa obrigatório"
+						value="#{veiculoController.objeto.placa}" />
+
+					<p:outputLabel value="Ano Fabricação" for="txtAno">
+					</p:outputLabel>
+					<p:inputText id="txtAno" required="true" maxlength="4" 
+						requiredMessage="Campo ano fabricação obrigatório"
+						value="#{veiculoController.objeto.ano}" />
+
+					<p:outputLabel value="Quantidade Vagas" for="txtVagas">
+					</p:outputLabel>
+					<p:inputText id="txtVagas" required="true"
+						requiredMessage="Campo quantidade vagas Obrigatorio"
+						value="#{veiculoController.objeto.qtdVagas}" />
+				</p:panelGrid>
+				<p:panelGrid columns="2" styleClass="gridBotons">
+					<p:commandButton value="Salvar"
+						rendered="#{veiculoController.objeto.codigo == null}"
+						update="growl, formCadVeiculo" icon="ui-icon-circle-check"
+						action="#{veiculoController.incluir}" />
+
+					<p:commandButton value="Editar"
+						rendered="#{veiculoController.objeto.codigo != null}"
+						update="growl, formCadVeiculo" icon="ui-icon-pencil"
+						action="#{veiculoController.alterar()}"></p:commandButton>
+
+					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+						update=" formCadVeiculo " action="#{veiculoController.limpar}" />
+				</p:panelGrid>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

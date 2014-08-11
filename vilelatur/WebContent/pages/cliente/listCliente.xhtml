@@ -1,0 +1,183 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/view/template/template.xhtml">
+
+	<ui:define name="centro">
+		<ui:insert>
+			<title>Clientes Cadastrados</title>
+			<style>
+.ui-outputlabel {
+	float: right;
+	font-weight: bold;
+}
+
+.userTopo {
+	float: left;
+}
+</style>
+
+		</ui:insert>
+		<f:facet name="header">
+	  				Clientes cadastrados
+	  				<p:button value="Novo" icon="ui-icon-plusthick"
+				href="/pages/cliente/cadCliente.jsf" />
+			<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+				href="javascript:window.history.go(-1)" />
+				<p:commandButton value="Imprimir" type="button"
+						icon="ui-icon-print">
+						<p:printer target=":frmCliente:tableCliente" />
+					</p:commandButton>
+		</f:facet>
+		<h:form id="frmCliente">
+			<p:growl id="growl" autoUpdate="true" life="3500" />
+			<p:dataTable id="tableCliente" paginator="true" rows="10"
+				selection="#{clienteController.objetoSelecionado}"
+				rowKey="#{_cliente.codigo}" selectionMode="single"
+				value="#{clienteController.listaDM}" var="_cliente"
+				emptyMessage="Nao foi encontrado nenhuma informação!">
+				<p:ajax event="rowSelect" update=":frmCliente:detalheCliente"
+					oncomplete="PF('clienteDialog').show()" />
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Código"></h:outputText>
+					</f:facet>
+					<h:outputText id="codigo" value="#{_cliente.codigo}" />
+					<p:tooltip id="toolTipTrack" for="codigo"
+						value="Clique para ver os dados completos!" trackMouse="true" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Nome"></h:outputText>
+					</f:facet>
+					<h:outputText id="nome" value="#{_cliente.nome}" />
+					<p:tooltip id="toolTipTrack2" for="nome"
+						value="Clique para ver os dados completos!" trackMouse="true" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="CPF"></h:outputText>
+					</f:facet>
+					<h:outputText id="cpf" value="#{_cliente.cpf}" />
+					<p:tooltip id="toolTipTrack3" for="cpf"
+						value="Clique para ver os dados completos!" trackMouse="true" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Telefone"></h:outputText>
+					</f:facet>
+					<h:outputText id="telefone" value="#{_cliente.telefone}" />
+					<p:tooltip id="toolTipTrack4" for="telefone"
+						value="Clique para ver os dados completos!" trackMouse="true" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Acões"></h:outputText>
+					</f:facet>
+					<center>
+						<p:commandButton style="font-size: 12px;" id="editar"
+							value="Editar"
+							action="#{clienteController.exibirFormularioEditar()}"
+							icon="ui-icon-pencil" update="tableCliente" />
+						<p:tooltip id="toolTipTrack5" for="editar"
+							value="Clique para editar as informções deste cadastro!"
+							trackMouse="true" />
+						<p:commandButton style="font-size: 12px;left: 10px; " id="remover"
+							value="Remover" action="#{clienteController.remover()}"
+							icon="ui-icon-trash" update="tableCliente" />
+						<p:tooltip id="toolTipTrack6" for="remover"
+							value="Apagar este cadastro!" trackMouse="true" />
+					</center>
+				</p:column>
+			</p:dataTable>
+			
+			<!-- Inicio Dialog Clientes -->
+			<p:dialog header="Cliente Detalhado" widgetVar="clienteDialog"
+				modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+				<p:outputPanel id="detalheCliente" style="text-align:center;">
+					<p:panelGrid columns="4" columnClasses="label,value"
+						style="width:780;">
+
+						<p:outputLabel value="Código:" for="txtCodigo">
+						</p:outputLabel>
+
+						<h:outputText id="txtCodigo" readonly="true"
+							value="#{clienteController.objetoSelecionado.codigo}" />
+						<p:outputLabel value="Nome:" for="txtNome">
+						</p:outputLabel>
+						<h:outputText id="txtNome"
+							value="#{clienteController.objetoSelecionado.nome}" />
+
+						<p:outputLabel value="RG:" for="txtRg">
+						</p:outputLabel>
+						<h:outputText id="txtRg"
+							value="#{clienteController.objetoSelecionado.rg}" />
+
+						<p:outputLabel value="CPF:" for="txtCpf">
+						</p:outputLabel>
+						<h:outputText id="txtCpf"
+							value="#{clienteController.objetoSelecionado.cpf}" />
+
+
+						<p:outputLabel value="Data Nascimento:" for="txtDtNascimento">
+						</p:outputLabel>
+
+						<h:outputText id="txtDtNascimento"
+							value="#{clienteController.objetoSelecionado.dataNasc}">
+							<f:convertDateTime pattern="dd/MM/yyyy">
+							</f:convertDateTime>
+						</h:outputText>
+
+						<p:outputLabel value="Endereço:" for="txtEndereco">
+						</p:outputLabel>
+						<h:outputText id="txtEndereco"
+							value="#{clienteController.objetoSelecionado.endereco}" />
+
+						<p:outputLabel value="Bairro:" for="txtBairro">
+						</p:outputLabel>
+						<h:outputText id="txtBairro"
+							value="#{clienteController.objetoSelecionado.bairro}" />
+
+						<p:outputLabel value="Número:" for="txtNumero">
+						</p:outputLabel>
+						<h:outputText id="txtNumero"
+							value="#{clienteController.objetoSelecionado.numero}" />
+
+						<p:outputLabel value="Complemento:" for="txtComplemento">
+						</p:outputLabel>
+						<h:outputText id="txtComplemento"
+							value="#{clienteController.objetoSelecionado.complemento}" />
+
+						<p:outputLabel value="Telefone:" for="txtTelefone">
+						</p:outputLabel>
+						<h:outputText id="txtTelefone"
+							value="#{clienteController.objetoSelecionado.telefone}" />
+
+						<p:outputLabel value="Cidade:" for="txtCidade">
+						</p:outputLabel>
+						<h:outputText id="txtCidade"
+							value="#{clienteController.objetoSelecionado.cidade}" />
+
+						<p:outputLabel value="UF:" for="txtUF" />
+						<h:outputText id="txtUF"
+							value="#{clienteController.objetoSelecionado.ufNome}" />
+					</p:panelGrid>
+				</p:outputPanel>
+				<center>
+					<p:commandButton value="Imprimir" type="button"
+						icon="ui-icon-print" style="display:block;margin-top: 20px">
+						<p:printer target="detalheCliente" />
+					</p:commandButton>
+				</center>
+			</p:dialog>
+			<!-- Fim Dialog Viagem Cliente -->
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>

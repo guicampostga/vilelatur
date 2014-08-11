@@ -1,0 +1,117 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/view/template/template.xhtml">
+	<ui:define name="centro">
+<f:facet name="header">
+	  				Emissao de Passagem
+	  				<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+				href="javascript:window.history.go(-1)" />
+	  			</f:facet>
+		<div id="DivCad">
+			<h:form id="formCadViagem">
+				<p:growl id="growl" autoUpdate="true" life="3500" />
+				<p:panelGrid columns="4" styleClass="gridPanel">
+					<p:outputLabel value="Codigo" for="txtCodigo">
+					</p:outputLabel>
+					<p:inputText id="txtCodigo" readonly="true"
+						value="#{viagemController.objeto.codigo}" />
+					
+					<p:outputLabel value="Passageiro" for="txtPassageiro" />
+					<p:selectOneMenu value="#{viagemController.objeto.passageiroId}" filter="true"
+						id="txtPassageiro" required="true" requiredMessage="Selecione um Passageiro">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{clienteController.lista}" var="_cliente"
+							itemValue="#{_cliente.codigo}" itemLabel="#{_cliente.nome}" />
+					</p:selectOneMenu>
+
+						<p:outputLabel value="Origem" for="txtOrigem" />
+					<p:selectOneMenu value="#{viagemController.objeto.origemId}" filter="true"
+						id="txtOrigem" required="true" requiredMessage="Selecione uma Origem">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{cidadeController.lista}" var="_cidade"
+							itemValue="#{_cidade.codigo}" itemLabel="#{_cidade.descricao}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Destino" for="txtDestino" />
+					<p:selectOneMenu value="#{viagemController.objeto.destinoId}" filter="true"
+						id="txtDestino" required="true" requiredMessage="Selecione um destino">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{cidadeController.lista}" var="_cidade"
+							itemValue="#{_cidade.codigo}" itemLabel="#{_cidade.descricao}" />
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="Motorista" for="txtMotorista" />
+					<p:selectOneMenu value="#{viagemController.objeto.motoristaId}" filter="true"
+						id="txtMotorista" required="true" requiredMessage="Selecione um destino">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{motoristaController.lista}" var="_motorista"
+							itemValue="#{_motorista.codigo}" itemLabel="#{_motorista.funcionarioNome}" />
+					</p:selectOneMenu>
+					
+						<p:outputLabel value="Veiculo" for="txtVeiculo" />
+					<p:selectOneMenu value="#{viagemController.objeto.veiculoId}" filter="true"
+						id="txtVeiculo" required="true" requiredMessage="Selecione um destino">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{veiculoController.lista}" var="_veiculo"
+							itemValue="#{_veiculo.codigo}" itemLabel="#{_veiculo.modeloVeiculo}" />
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="Data Saida" for="txtDataSaida">
+					</p:outputLabel>
+					<p:calendar id="txtDataSaida" required="true"
+						requiredMessage="Campo data saida obrigatorio"
+						value="#{viagemController.objeto.viagemData}" />
+						
+						<p:outputLabel value="Horario" for="txtHorario" />
+					<p:selectOneMenu value="#{viagemController.objeto.horaSaida}" filter="true"
+						id="txtHorario" required="true" requiredMessage="Selecione um destino">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{horarioController.lista}" var="_horario"
+							itemValue="#{_horario.codigo}" itemLabel="#{_horario.horaSaida}" />
+					</p:selectOneMenu>
+					
+					<p:outputLabel value="Endereco" for="txtEndereco">
+					</p:outputLabel>
+					<p:inputText id="txtEndereco" required="true"
+						requiredMessage="Campo Endereco obrigatorio"
+						value="#{viagemController.objeto.enderecoEntrega}" />
+
+					<p:outputLabel value="Numero" for="txtNumero">
+					</p:outputLabel>
+					<p:inputText id="txtNumero" required="true"
+						requiredMessage="Campo Numero obrigatorio"
+						value="#{viagemController.objeto.numeroEntrega}" />
+
+					<p:outputLabel value="Complemento" for="txtComplemento">
+					</p:outputLabel>
+					<p:inputText id="txtComplemento"
+						value="#{viagemController.objeto.complementoEntrega}" />
+
+					<p:outputLabel value="Bairro" for="txtBairro">
+					</p:outputLabel>
+					<p:inputText id="txtBairro" required="true"
+						requiredMessage="Campo Bairro obrigatorio"
+						value="#{viagemController.objeto.bairroEntrega}" />
+				</p:panelGrid>
+			<p:panelGrid columns="2" styleClass="gridBotons">
+					<p:commandButton value="Salvar"
+						rendered="#{viagemController.objeto.codigo == null}"
+						update="growl, formCadViagem" icon="ui-icon-circle-check"
+						action="#{viagemController.incluir}" />
+
+					<p:commandButton value="Editar"
+						rendered="#{viagemController.objeto.codigo != null}"
+						update="growl, formCadViagem" icon="ui-icon-pencil"
+						action="#{viagemController.alterar()}"></p:commandButton>
+
+					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+						update=" formCadViagem "
+						action="#{viagemController.limpar}" />
+				</p:panelGrid>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

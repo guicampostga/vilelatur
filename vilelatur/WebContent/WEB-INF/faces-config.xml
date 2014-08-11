@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd"
+	version="2.1">
+
+	<!-- Cliente Incio -->
+<navigation-rule>
+		<from-view-id>/pages/cliente/listCliente.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>exibirFormularioIncluir</from-outcome>
+			<to-view-id>/pages/cliente/cadCliente.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>exibirFormularioEditar</from-outcome>
+			<to-view-id>/pages/cliente/cadCliente.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+	<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/cliente/listCliente.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/cliente/listCliente.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/pages/cliente/cadCliente.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/cliente/listCliente.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		</navigation-rule>
+	<!-- Cliente Fim -->
+
+	<!-- Veiculo Inicio -->
+	<navigation-rule>
+		<from-view-id>/pages/veiculo/listVeiculo.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>exibirFormularioIncluir</from-outcome>
+			<to-view-id>/pages/veiculo/cadVeiculo.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>exibirFormularioEditar</from-outcome>
+			<to-view-id>/pages/veiculo/cadVeiculo.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/veiculo/listVeiculo.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/veiculo/listVeiculo.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/pages/veiculo/cadVeiculo.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/veiculo/listVeiculo.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<!-- Veiculo Fim -->
+
+	<!-- Funcao Inicio -->
+	<navigation-rule>
+		<from-view-id>/pages/funcao/listFuncao.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>exibirFormularioIncluir</from-outcome>
+			<to-view-id>/pages/funcao/cadFuncao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>exibirFormularioEditar</from-outcome>
+			<to-view-id>/pages/funcao/cadFuncao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/funcao/listFuncao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/pages/funcao/cadFuncao.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>//pages/funcao/listFuncao.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<!-- Funcao Fim -->
+
+	<!-- Empresa Inicio -->
+	<navigation-rule>
+		<from-view-id>/pages/empresa/listEmpresa.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>exibirFormularioIncluir</from-outcome>
+			<to-view-id>/pages/empresa/cadEmpresa.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>exibirFormularioEditar</from-outcome>
+			<to-view-id>/pages/empresa/cadEmpresa.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/empresa/listEmpresa.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/pages/empresa/cadEmpresa.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/empresa/listEmpresa.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<!-- Empresa Fim -->
+
+	<!-- Empresa Inicio -->
+	<navigation-rule>
+		<from-view-id>/pages/funcionario/listFuncionario.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>exibirFormularioIncluir</from-outcome>
+			<to-view-id>/pages/funcionario/cadFuncionario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>exibirFormularioEditar</from-outcome>
+			<to-view-id>/pages/funcionario/cadFuncionario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>//pages/funcionario/listFuncionario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/pages/funcionario/cadFuncionario.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/funcionario/listFuncionario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<!-- Empresa Fim -->
+	
+	<!-- Usuario Inicio -->
+	<navigation-rule>
+		<from-view-id>/pages/usuario/listUsuario.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>exibirFormularioIncluir</from-outcome>
+			<to-view-id>/pages/usuario/cadUsuario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>exibirFormularioEditar</from-outcome>
+			<to-view-id>/pages/usuario/cadUsuario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/usuario/listUsuario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/usuario/listUsuario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/pages/usuario/cadUsuario.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/usuario/listUsuario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<!-- Usuario Fim -->
+	
+	<!-- Funcionario Inicio -->
+	<navigation-rule>
+		<from-view-id>/pages/funcionario/listFuncionario.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>exibirFormularioIncluir</from-outcome>
+			<to-view-id>/pages/funcionario/cadFuncionario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>exibirFormularioEditar</from-outcome>
+			<to-view-id>/pages/funcionario/cadFuncionario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/funcionario/listFuncionario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/funcionario/listFuncionario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/pages/funcionario/cadFuncionario.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/funcionario/listFuncionario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<!-- Funcionario Fim -->
+
+	<!-- Motorista Inicio -->
+	<navigation-rule>
+		<from-view-id>/pages/motorista/listMotorista.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>exibirFormularioIncluir</from-outcome>
+			<to-view-id>/pages/motorista/cadMotorista.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>exibirFormularioEditar</from-outcome>
+			<to-view-id>/pages/motorista/cadMotorista.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/motorista/listMotorista.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/motorista/listMotorista.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/pages/motorista/cadMotorista.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/motorista/listMotorista.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<!-- Motorista Fim -->
+	
+		<!-- Horario Inicio -->
+	<navigation-rule>
+		<from-view-id>/pages/horario/listHorario.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>exibirFormularioIncluir</from-outcome>
+			<to-view-id>/pages/horario/cadHorario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>exibirFormularioEditar</from-outcome>
+			<to-view-id>/pages/horario/cadHorario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/horario/listHorario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/horario/listHorario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/pages/horario/cadHorario.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/horario/listHorario.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<!-- Horario Fim -->
+	
+			<!-- viagem Inicio -->
+	<navigation-rule>
+		<from-view-id>/pages/viagem/listViagem.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>exibirFormularioIncluir</from-outcome>
+			<to-view-id>/pages/viagem/cadViagem.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>exibirFormularioEditar</from-outcome>
+			<to-view-id>/pages/viagem/cadViagem.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/viagem/listViagem.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/viagem/listViagem.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>/pages/viagem/cadViagem.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>listar</from-outcome>
+			<to-view-id>/pages/viagem/listViagem.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<!-- Viagem Fim -->
+</faces-config>

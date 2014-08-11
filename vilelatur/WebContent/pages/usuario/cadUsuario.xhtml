@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/view/template/template.xhtml">
+	<ui:define name="centro">
+			<ui:insert>
+			<title>Cadastro de Usuário</title>
+		</ui:insert>
+		<f:facet name="header">
+	  				Cadastro de Usuário
+	  				<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+				href="javascript:window.history.go(-1)" />
+	  			</f:facet>
+		<div id="DivCad">
+			<h:form id="formCadUsuario">
+				<p:growl id="growl" autoUpdate="true" life="3500" />
+				<p:panelGrid columns="4" styleClass="gridPanel">
+					<p:outputLabel value="Codigo" for="txtCodigo">
+					</p:outputLabel>
+					<p:inputText id="txtCodigo" readonly="true"
+						value="#{usuarioController.objeto.codigo}" />
+
+					<p:outputLabel value="Funcionário" for="txtFuncionario" />
+					<p:selectOneMenu value="#{usuarioController.objeto.funcionario}"
+						id="txtFuncionario" required="true"
+						requiredMessage="Selecione um funcionário">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{funcionarioController.lista}"
+							var="_funcionario" itemValue="#{_funcionario.codigo}"
+							itemLabel="#{_funcionario.nome}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Usuário" for="txtUsuario">
+					</p:outputLabel>
+					<p:inputText id="txtUsuario" required="true"
+						requiredMessage="Campo usuário obrigatório"
+						value="#{usuarioController.objeto.username}" />
+
+					<p:outputLabel value="Senha" for="txtSenha">
+					</p:outputLabel>
+					<p:inputText type="password" id="txtSenha" required="true"
+						requiredMessage="Campo senha obrigatório"
+						value="#{usuarioController.objeto.password}" />
+
+					<p:outputLabel value="Permissão" for="txtPermissao">
+					</p:outputLabel>
+					<p:selectOneMenu value="#{usuarioController.objeto.authority}"
+						id="txtPermissao" required="true"
+						requiredMessage="Campo Permissão obrigatório">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItem itemLabel="Administrador"
+							itemValue="ROLE_ADMINISTRADOR" />
+						<f:selectItem itemLabel="Usuario" itemValue="ROLE_USUARIO" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Ativado" for="txtAtivo">
+					</p:outputLabel>
+					<p:selectOneMenu value="#{usuarioController.objeto.enabled}"
+						id="txtAtivo" required="true"
+						requiredMessage="Campo ativo obrigatório">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItem itemLabel="Sim" itemValue="true" />
+						<f:selectItem itemLabel="Nao" itemValue="false" />
+					</p:selectOneMenu>
+				</p:panelGrid>
+
+				<p:panelGrid columns="2" styleClass="gridBotons">
+					<p:commandButton value="Salvar"
+						rendered="#{usuarioController.objeto.codigo == null}"
+						update="growl, formCadUsuario" icon="ui-icon-circle-check"
+						action="#{usuarioController.incluir}" />
+
+					<p:commandButton value="Editar"
+						rendered="#{usuarioController.objeto.codigo != null}"
+						update="growl, formCadUsuario" icon="ui-icon-pencil"
+						action="#{usuarioController.alterar()}"></p:commandButton>
+
+					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+						update=" formCadUsuario " action="#{usuarioController.lista}" />
+					
+				</p:panelGrid>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

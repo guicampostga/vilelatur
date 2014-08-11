@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/view/template/template.xhtml">
+	<ui:define name="centro">
+		<ui:insert>
+			<title>Cadastro de Horários</title>
+		</ui:insert>
+		<f:facet name="header">
+	  				Cadastro de Horários
+	  				<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+				href="javascript:window.history.go(-1)" />
+	  			</f:facet>
+		<div id="DivCad">
+			<h:form id="formCadUsuario">
+				<p:growl id="growl" autoUpdate="true" life="3500" />
+				<p:panelGrid columns="4" styleClass="gridPanel">
+					<p:outputLabel value="Código" for="txtCodigo">
+					</p:outputLabel>
+					<p:inputText id="txtCodigo" readonly="true"
+						value="#{horarioController.objeto.codigo}" />
+
+					<p:outputLabel value="Hora saida" for="txtHoraSaida">
+					</p:outputLabel>
+					<p:inputMask id="txtHoraSaida" required="true" mask="99:99"
+						requiredMessage="Campo horário saida obrigatorio"
+						value="#{horarioController.objeto.horaSaida}" />
+
+					<p:outputLabel value="Hora Chegada" for="txtHoraChegada">
+					</p:outputLabel>
+					<p:inputMask id="txtHoraChegada" required="true" mask="99:99"
+						requiredMessage="Campo horário chegada obrigatorio"
+						value="#{horarioController.objeto.horaChegada}" />
+
+					<p:outputLabel value="Cidade origem" for="txtOrigem" />
+					<p:selectOneMenu value="#{horarioController.objeto.cidadeOrigem}"
+						filter="true" id="txtOrigem" required="true"
+						requiredMessage="Selecione uma Origem">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{cidadeController.lista}" var="_cidade"
+							itemValue="#{_cidade.codigo}" itemLabel="#{_cidade.descricao}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Cidade destino" for="txtDestino" />
+					<p:selectOneMenu value="#{horarioController.objeto.cidadeDestino}"
+						filter="true" id="txtDestino" required="true"
+						requiredMessage="Selecione um destino">
+						<f:selectItem itemLabel="- Selecione -" itemValue="" />
+						<f:selectItems value="#{cidadeController.lista}" var="_cidade"
+							itemValue="#{_cidade.codigo}" itemLabel="#{_cidade.descricao}" />
+					</p:selectOneMenu>
+
+				</p:panelGrid>
+
+				<p:panelGrid columns="2" styleClass="gridBotons">
+					<p:commandButton value="Salvar"
+						rendered="#{horarioController.objeto.codigo == null}"
+						update="growl, formCadUsuario" icon="ui-icon-circle-check"
+						action="#{horarioController.incluir}" />
+
+					<p:commandButton value="Editar"
+						rendered="#{horarioController.objeto.codigo != null}"
+						update="growl, formCadUsuario" icon="ui-icon-pencil"
+						action="#{horarioController.alterar()}"></p:commandButton>
+
+					<p:commandButton value="Cancelar" icon="ui-icon-cancel"
+						update=" formCadUsuario " action="#{horarioController.limpar}" />
+
+				</p:panelGrid>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>

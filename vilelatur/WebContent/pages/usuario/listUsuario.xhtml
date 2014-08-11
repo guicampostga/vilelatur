@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/view/template/template.xhtml">
+	<ui:define name="centro">
+		<ui:insert>
+			<title>Usuários Cadastrados</title>
+		</ui:insert>
+		<f:facet name="header">
+	  				Usuários Cadastrados
+	  				<p:button value="Novo" icon="ui-icon-plusthick"
+				href="/pages/usuario/cadUsuario.jsf" />
+			<p:button value="Voltar" icon="ui-icon-arrowreturnthick-1-w"
+				href="javascript:window.history.go(-1)" />
+			<p:commandButton value="Imprimir" type="button" icon="ui-icon-print">
+				<p:printer target=":formList:tableUsuario" />
+			</p:commandButton>
+		</f:facet>
+		<h:form id="formList">
+			<p:growl id="growl" autoUpdate="true" life="3500" />
+			<p:dataTable id="tableUsuario" paginator="true" rows="10"
+				value="#{usuarioController.listaDM}" var="_usuario"
+				emptyMessage="Nao foi encontrado nenhuma informação!">
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Código"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_usuario.codigo}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Username"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_usuario.username}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Permissão"></h:outputText>
+					</f:facet>
+					<h:outputText value="#{_usuario.authority}" />
+				</p:column>
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Ativo"></h:outputText>
+					</f:facet>
+					<h:outputText value="Sim" rendered="#{_usuario.enabled == true}" />
+					<h:outputText value="Não" rendered="#{_usuario.enabled == false}" />
+				</p:column>
+
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Ações"></h:outputText>
+					</f:facet>
+					<center>
+						<p:commandButton style="font-size: 12px;" id="editar"
+							value="Editar"
+							action="#{usuarioController.exibirFormularioEditar()}"
+							update="tableUsuario" icon="ui-icon-pencil" />
+						<p:tooltip id="toolTipTrack5" for="editar"
+							value="Clique para editar as informções deste cadastro!"
+							trackMouse="true" />
+						<p:commandButton style="font-size: 12px; left: 10px;" id="remover"
+							value="Remover" action="#{usuarioController.remover()}"
+							update="tableUsuario" icon="ui-icon-trash" />
+						<p:tooltip id="toolTipTrack6" for="remover"
+							value="Apagar este cadastro!" trackMouse="true" />
+					</center>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
